@@ -38,7 +38,6 @@ def resize(im, base=200):
 	return im
 
 
-
 def image2ASCII(im, scale=200, showimage=False):
 	if showimage:
 		im.show()
@@ -68,7 +67,6 @@ def image2ASCII(im, scale=200, showimage=False):
 
 	#return  the final string
 	return output
-
 
 
 def RenderASCII(text, fontsize=5, bgcolor='#EDEDED'):
@@ -111,12 +109,9 @@ def stitchImages(im1,im2):
 	return im
 
 
-
-
-
 def PythonistaTest():
 	'''A test of the module for iOS devices running Pythonista'''
-	import console,photos,clipboard
+	import console, photos  # ,clipboard
 	#Ask the user to either take a photo or choose an existing one
 	capture = console.alert("Image2ASCII", button1="Take Photo", button2="Pick Photo")
 	if capture == 1:
@@ -133,9 +128,8 @@ def PythonistaTest():
 	console.quicklook('image.jpg')
 	mode = console.alert("Image2ASCII", "You can either:","Share Text","Share Image")
 	if mode == 1:
-		file = open('output.txt', 'w')
-		file.write(out)
-		file.close()
+		with open('output.txt', 'w') as out_file:
+			out_file.write(out)
 		console.open_in('output.txt')
 	elif mode == 2:
 		console.open_in('image.jpg')
@@ -143,10 +137,9 @@ def PythonistaTest():
 	console.clear()
 
 
-
 if __name__ == "__main__":
 	import sys
-	if sys.platform=='iphoneos': # We're on iOS, and therefore Pythonista
+	if sys.platform == 'iphoneos': # We're on iOS, and therefore Pythonista
 		PythonistaTest()
 	else: # We're on desktop. Use `python Image2ASCII.py my-image.jpg`
 		im = Image.open(sys.argv[1])
